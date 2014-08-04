@@ -24,7 +24,8 @@ import android.provider.MediaStore.Images.Media;
  * Created by Kim on 7/28/2014.
  */
 public class MyActivity extends Activity {
-    Button button;
+    Button button1;
+    Button button2;
     ImageView img_logo;
     protected static final int CAMERA_REQUEST = 0;
     protected static final int GALLERY_PICTURE = 1;
@@ -40,43 +41,31 @@ public class MyActivity extends Activity {
 
         img_logo = (ImageView)findViewById(R.id.imageView);
 
-        button= (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        button1= (Button)findViewById(R.id.camera);
+        button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startDialog();
             }
-
+        });
+        
+        button2= (Button)findViewById(R.id.gallery);
+        button1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startDialog();
+            }
         });
     }
-
-    private void startDialog() {
-        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(this);
-        myAlertDialog.setTitle("Upload Pictures Option");
-        myAlertDialog.setMessage("How do you want to set your picture?");
-
-        myAlertDialog.setPositiveButton("Gallery",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        pictureActionIntent = new Intent(
-                                Intent.ACTION_GET_CONTENT, null);
-                        pictureActionIntent.setType("image/*");
-                        pictureActionIntent.putExtra("return-data", true);
-                        startActivityForResult(pictureActionIntent,
-                                GALLERY_PICTURE);
-                    }
-                });
-
-        myAlertDialog.setNegativeButton("Camera",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        pictureActionIntent = new Intent(
-                                android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(pictureActionIntent,
-                                CAMERA_REQUEST);
-
-                    }
-                });
-        myAlertDialog.show();
+    
+    private void callCamera() {
+        pictureActionIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(pictureActionIntent, CAMERA_REQUEST);
+    }
+    
+    private void callGallery() {
+        pictureActionIntent = new Intent(Intent.ACTION_GET_CONTENT, null);
+        pictureActionIntent.setType("image/*");
+        pictureActionIntent.putExtra("return-data", true);
+        startActivityForResult(pictureActionIntent, GALLERY_PICTURE);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
