@@ -44,14 +44,14 @@ public class MyActivity extends Activity {
         button1= (Button)findViewById(R.id.camera);
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startDialog();
+                callCamera();
             }
         });
         
         button2= (Button)findViewById(R.id.gallery);
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startDialog();
+                callGallery();
             }
         });
     }
