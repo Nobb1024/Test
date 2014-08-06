@@ -1,10 +1,7 @@
 package com.example.kim.test;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,7 +18,7 @@ import android.widget.Toast;
 import android.provider.MediaStore.Images.Media;
 
 /**
- * Created by Kim on 7/28/2014.
+ * Updated by Jeremy on 06/08/2014.
  */
 public class MyActivity extends Activity {
     Button button1;
@@ -49,7 +46,7 @@ public class MyActivity extends Activity {
         });
         
         button2= (Button)findViewById(R.id.gallery);
-        button1.setOnClickListener(new View.OnClickListener() {
+        button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callGallery();
             }
@@ -75,7 +72,7 @@ public class MyActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
                     // our BitmapDrawable for the thumbnail
-                    BitmapDrawable bmpDrawable = null;
+                    BitmapDrawable bmpDrawable;
                     // try to retrieve the image using the data from the intent
                     Cursor cursor = getContentResolver().query(data.getData(),
                             null, null, null, null);
