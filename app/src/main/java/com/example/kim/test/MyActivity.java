@@ -34,6 +34,7 @@ public class MyActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_my);
 
         img_logo = (ImageView)findViewById(R.id.imageView);
@@ -51,14 +52,19 @@ public class MyActivity extends Activity {
                 callGallery();
             }
         });
+
     }
-    
+
     private void callCamera() {
         pictureActionIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(pictureActionIntent, CAMERA_REQUEST);
     }
     
     private void callGallery() {
+        if (bitmap != null)
+        {
+            bitmap.recycle();
+        }
         pictureActionIntent = new Intent(Intent.ACTION_GET_CONTENT, null);
         pictureActionIntent.setType("image/*");
         pictureActionIntent.putExtra("return-data", true);
